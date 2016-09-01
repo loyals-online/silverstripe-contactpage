@@ -1,0 +1,36 @@
+{
+  "name": "mediaweb/silverstripe-contactpage",
+  "description": "A simple yet configurable contact page",
+  "type": "silverstripe-module",
+  "keywords": [
+    "silverstripe",
+    "contactpage",
+    "module",
+    "cms"
+  ],
+  "license": "BSD-3-Clause",
+  "authors": [
+    {
+      "name": "Martijn Schenk",
+      "email": "martijnschenk@loyals.nl"
+    },
+    {
+      "name": "Tim Beekhuis",
+      "email": "tbeekhuis@mediaweb.nl"
+    }
+  ],
+  "require": {
+    "silverstripe/framework": "~3.4",
+    "mediaweb/silverstripe-jsend": "dev-master"
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/Mediaweb/silverstripe-jsend"
+    }
+  ],
+  "extra": {
+    "installer-name": "contactpage"
+  },
+  "target-dir": "contactpage"
+}
