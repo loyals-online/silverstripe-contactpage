@@ -21,14 +21,8 @@
   ],
   "require": {
     "silverstripe/framework": "~3.4",
-    "mediaweb/silverstripe-jsend": "dev-master"
+    "mediaweb/silverstripe-jsend": "^1.0"
   },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/Mediaweb/silverstripe-jsend"
-    }
-  ],
   "extra": {
     "installer-name": "contactpage"
   },
