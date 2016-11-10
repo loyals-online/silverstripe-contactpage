@@ -16,8 +16,7 @@ class ContactForm extends Form
         parent::setupFormErrors();
 
         // trigger foundation abide validation
-        $this->setAttribute('data-abide', 'ajax');
-        $this->addExtraClass('prospect-form');
+        $this->setAttribute('data-abide', 'data-abide');
 
         // add som emore page/controller requirement
         Requirements::javascript(JSEND_DIR . '/js/jsend.js');
