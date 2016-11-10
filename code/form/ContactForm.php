@@ -33,11 +33,9 @@ class ContactForm extends Form
         ])
             ->addExtraClass('row');
 
-        $fields = new FieldList([
+        return (new FieldList([
             $row,
-        ]);
-
-        return $fields;
+        ]))->setForm($this);
     }
 
     public function getBareFieldList()
@@ -69,7 +67,7 @@ class ContactForm extends Form
 
     public function getActions()
     {
-        return new FieldList($this->getBareActions());
+        return (new FieldList($this->getBareActions()))->setForm($this);
     }
 
     public function getBareActions()
@@ -86,10 +84,7 @@ class ContactForm extends Form
 
     public function getRequiredFields()
     {
-        $validator = new RequiredFields($this->getBareRequiredFields());
-        $validator->setForm($this);
-
-        return $validator;
+        return (new RequiredFields($this->getBareRequiredFields()))->setForm($this);
     }
 
     public function getBareRequiredFields()
