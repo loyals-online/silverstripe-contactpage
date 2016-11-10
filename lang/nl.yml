@@ -1,0 +1,6 @@
+nl:
+  ContactSubmission:
+    Name: Naam
+    Email: E-mail
+    Subject: Onderwerp
+    Message: Bericht

@@ -15,8 +15,12 @@
       "email": "martijnschenk@loyals.nl"
     },
     {
+      "name": "Jan-Pieter van der Poel",
+      "email": "jp@loyals.nl"
+    },
+    {
       "name": "Tim Beekhuis",
-      "email": "tbeekhuis@mediaweb.nl"
+      "email": "tim@loyals.nl"
     }
   ],
   "require": {
