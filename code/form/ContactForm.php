@@ -2,8 +2,19 @@
 
 class ContactForm extends Form
 {
+    /**
+     * Current page
+     *
+     * @var int
+     */
     protected $page;
 
+    /**
+     * ContactForm constructor.
+     *
+     * @param \Controller $controller
+     * @param string      $name
+     */
     public function __construct(\Controller $controller, $name)
     {
         parent::__construct($controller, $name, FieldList::create(), FieldList::create(), null);
@@ -22,6 +33,11 @@ class ContactForm extends Form
         Requirements::javascript(JSEND_DIR . '/js/jsend.js');
     }
 
+    /**
+     * Retrieve the fieldlist
+     *
+     * @return FieldList
+     */
     public function getFieldList()
     {
         $fieldlist = CompositeField::create($this->getBareFieldList());
@@ -37,6 +53,11 @@ class ContactForm extends Form
         ]))->setForm($this);
     }
 
+    /**
+     * Retrieve the bare fieldlist
+     *
+     * @return array
+     */
     public function getBareFieldList()
     {
         return [
@@ -64,11 +85,21 @@ class ContactForm extends Form
         ];
     }
 
+    /**
+     * Retrieve the actions
+     *
+     * @return FieldList
+     */
     public function getActions()
     {
         return (new FieldList($this->getBareActions()))->setForm($this);
     }
 
+    /**
+     * Retrieve the bare actions
+     *
+     * @return array
+     */
     public function getBareActions()
     {
         return [
@@ -81,11 +112,21 @@ class ContactForm extends Form
         ];
     }
 
+    /**
+     * Retrieve the required fields
+     *
+     * @return RequiredFields
+     */
     public function getRequiredFields()
     {
         return (new RequiredFields($this->getBareRequiredFields()))->setForm($this);
     }
 
+    /**
+     * Retrieve the bare required fields
+     *
+     * @return array
+     */
     public function getBareRequiredFields()
     {
         return [
@@ -96,6 +137,12 @@ class ContactForm extends Form
         ];
     }
 
+    /**
+     * Handle the contact form
+     *
+     * @param array $data
+     * @param Form  $form
+     */
     function SendContactForm($data, $form)
     {
         //Save and email submission

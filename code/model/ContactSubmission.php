@@ -4,19 +4,11 @@
  * Class ContactSubmission
  *
  * @property string $Name
- * @property string $SurName
- * @property string $LawFirm
- * @property string $PractiseSince
- * @property string $Address
- * @property string $Zip
- * @property string $City
- * @property string $Country
- * @property string $Phone
  * @property string $Email
+ * @property string $Subject
+ * @property string $Message
  * @property int $PageID
- * @property int $CVID
- * @method ContactSubmissionPage Page()
- * @method File CV()
+ * @method ContactPage Page()
  */
 class ContactSubmission extends DataObject
 {
@@ -36,15 +28,4 @@ class ContactSubmission extends DataObject
         'Email'   => 'Email'
     ];
 
-}
-
-/**
- * Class ContactSubmission_Controller
- *
- * @property ContactSubmission dataRecord
- * @method ContactSubmission data()
- * @mixin ContactSubmission dataRecord
- */
-class ContactSubmission_Controller extends Page_Controller
-{
 }
