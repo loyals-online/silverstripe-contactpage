@@ -12,7 +12,7 @@
  */
 class ContactSubmission extends DataObject
 {
-    static $db = [
+    private static $db = [
         'Name'          => 'Varchar(255)',
         'Email'         => 'Varchar(255)',
         'Subject'       => 'Varchar(255)',

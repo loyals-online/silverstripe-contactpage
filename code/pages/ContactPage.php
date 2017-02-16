@@ -90,11 +90,11 @@ class ContactPage extends Page
  */
 class ContactPage_Controller extends Page_Controller
 {
-    static $allowed_actions = array(
+    private static $allowed_actions = array(
         'ContactForm'
     );
 
-    function ContactForm()
+    public function ContactForm()
     {
         return ContactForm::create($this, 'ContactForm')
             ->addExtraClass('Contactform')->setAttribute('data-abide', 'data-abide');

@@ -143,7 +143,7 @@ class ContactForm extends Form
      * @param array $data
      * @param Form  $form
      */
-    function SendContactForm($data, $form)
+    public function SendContactForm($data, $form)
     {
         //Save and email submission
         $submission = new ContactSubmission();
@@ -171,15 +171,6 @@ class ContactForm extends Form
             'ContactSubject' => $data['Subject'],
             'ContactMessage' => $data['Message'],
         ]);
-
-        if (
-            ($fileField = $form->Fields()
-                ->dataFieldByName('CV')) &&
-            ($file = File::get()
-                ->byID((int) $fileField->value))
-        ) {
-            $email->attachFile($file->getFilename());
-        }
 
         //send mail
         $email->send();
