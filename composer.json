@@ -1,7 +1,7 @@
 {
   "name": "mediaweb/silverstripe-contactpage",
   "description": "A simple yet configurable contact page",
-  "type": "silverstripe-module",
+  "type": "silverstripe-vendormodule",
   "keywords": [
     "silverstripe",
     "contactpage",
@@ -21,14 +21,19 @@
     {
       "name": "Tim Beekhuis",
       "email": "tim@loyals.nl"
+    },
+    {
+      "name": "Gabrijel Gavranović",
+      "email": "gabrijel@gavro.nl"
     }
   ],
   "require": {
-    "silverstripe/framework": "~3.4",
-    "mediaweb/silverstripe-jsend": "^1.0"
+    "silverstripe/framework": "^4",
+    "mediaweb/silverstripe-jsend": "^2.0"
   },
-  "extra": {
-    "installer-name": "contactpage"
-  },
-  "target-dir": "contactpage"
+  "autoload": {
+    "psr-4": {
+      "Loyals\\ContactPage\\": "src/"
+    }
+  }
 }

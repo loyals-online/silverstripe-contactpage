@@ -1,5 +1,20 @@
 <?php
 
+namespace Loyals\ContactPage\Form;
+
+use Loyals\ContactPage\Model\ContactSubmission;
+use SilverStripe\Control\Controller;
+use SilverStripe\Control\Director;
+use SilverStripe\Control\Email\Email;
+use SilverStripe\Forms\CompositeField;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\Form;
+use SilverStripe\Forms\FormAction;
+use SilverStripe\Forms\RequiredFields;
+use SilverStripe\Forms\TextareaField;
+use SilverStripe\Forms\TextField;
+use SilverStripe\View\Requirements;
+
 class ContactForm extends Form
 {
     /**
@@ -12,10 +27,10 @@ class ContactForm extends Form
     /**
      * ContactForm constructor.
      *
-     * @param \Controller $controller
+     * @param Controller $controller
      * @param string      $name
      */
-    public function __construct(\Controller $controller, $name)
+    public function __construct(Controller $controller, $name)
     {
         parent::__construct($controller, $name, FieldList::create(), FieldList::create(), null);
 
@@ -30,7 +45,7 @@ class ContactForm extends Form
         $this->setAttribute('data-abide', 'data-abide');
 
         // add som emore page/controller requirement
-        Requirements::javascript(JSEND_DIR . '/js/jsend.js');
+        Requirements::javascript('loyals/jsend:javascript/jsend.js');
     }
 
     /**
@@ -153,19 +168,22 @@ class ContactForm extends Form
 
         //Set data
         $From    = $data['Email'];
-        $Sender  = sprintf('%1$s <%2$s>', $this->controller->data()->NameFrom, $this->controller->data()->MailFrom);
+        $Sender  = $this->controller->data()->MailFrom;
         $To      = $this->controller->data()->MailTo;
         $Subject = sprintf('%1$s: %2$s', $this->controller->data()->MailSubject, $data['Subject']);
         $email   = new Email($Sender, $To, $Subject);
 
+        // Set from with pretty name.
+        $email->setFrom($Sender, $this->controller->data()->NameFrom);
+
         // Set reply-to naar persoon die het formulier heeft ingevuld
-        $email->addCustomHeader('Reply-To', $From);
+        $email->setReplyTo($From);
 
         //set template
-        $email->setTemplate('ContactFormEmail');
+        $email->setHTMLTemplate('email\\ContactFormEmail');
 
         //populate template
-        $email->populateTemplate([
+        $email->setData([
             'ContactName'    => $data['Name'],
             'ContactEmail'   => $data['Email'],
             'ContactSubject' => $data['Subject'],

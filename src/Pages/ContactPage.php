@@ -1,5 +1,27 @@
 <?php
 
+namespace Loyals\ContactPage\Pages;
+
+use Page;
+use Loyals\ContactPage\Controllers\ContactPageController;
+use Loyals\ContactPage\Model\ContactSubmission;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldButtonRow;
+use SilverStripe\Forms\GridField\GridFieldConfig;
+use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
+use SilverStripe\Forms\GridField\GridFieldDataColumns;
+use SilverStripe\Forms\GridField\GridFieldDeleteAction;
+use SilverStripe\Forms\GridField\GridFieldDetailForm;
+use SilverStripe\Forms\GridField\GridFieldEditButton;
+use SilverStripe\Forms\GridField\GridFieldPaginator;
+use SilverStripe\Forms\GridField\GridFieldSortableHeader;
+use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\TextField;
+use Symbiote\GridFieldExtensions\GridFieldAddExistingSearchButton;
+use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
+use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
+use SilverStripe\ORM\DataList;
 
 /**
  * Class ContactSubmissionPage
@@ -19,11 +41,11 @@ class ContactPage extends Page
         'NameFrom'         => 'Varchar(100)',
         'MailSubject'      => 'Varchar(255)',
         'SubmitButtonText' => 'Varchar(255)',
-        'SubmitText'       => 'CustomHTMLText',
+        'SubmitText'       => 'HTMLText',
     ];
 
     private static $has_many = [
-        'Submissions' => 'ContactSubmission'
+        'Submissions' => ContactSubmission::class,
     ];
 
     public function getCMSFields()
@@ -40,7 +62,7 @@ class ContactPage extends Page
         $fields->addFieldToTab("Root.OnSubmission", new TextField('NameFrom', 'Afzender (Naam)'));
         $fields->addFieldToTab("Root.OnSubmission", new TextField('MailSubject', 'Email onderwerp'));
         $fields->addFieldToTab("Root.OnSubmission", new TextField('SubmitButtonText', 'Verzendknop Tekst'));
-        $fields->addFieldToTab("Root.OnSubmission", new CustomHTMLEditorField('SubmitText', 'Bedankt Tekst'));
+        $fields->addFieldToTab("Root.OnSubmission", new HTMLEditorField('SubmitText', 'Bedankt Tekst'));
 
         $gridFieldConfig = GridFieldConfig::create()->addComponents(
             new GridFieldToolbarHeader(),
@@ -66,42 +88,22 @@ class ContactPage extends Page
         $config->addComponent(new GridFieldDeleteAction(true));
         $config->addComponent(new GridFieldOrderableRows('SortOrder'));
 
-        $editableColumns->setDisplayFields(array(
-            'Name' => array(
+        $editableColumns->setDisplayFields([
+            'Name'  => [
                 'title' => 'Name',
-                'field' => 'ReadonlyField'
-            ),
-            'Email'    => array(
+                'field' => 'ReadonlyField',
+            ],
+            'Email' => [
                 'title' => 'Email',
-                'field' => 'ReadonlyField'
-            )
-        ));
+                'field' => 'ReadonlyField',
+            ],
+        ]);
 
         return $fields;
     }
-}
 
-/**
- * Class ContactPage_Controller
- *
- * @property ContactPage dataRecord
- * @method ContactPage data()
- * @mixin ContactPage dataRecord
- */
-class ContactPage_Controller extends Page_Controller
-{
-    private static $allowed_actions = array(
-        'ContactForm'
-    );
-
-    public function ContactForm()
+    public function getControllerName()
     {
-        return ContactForm::create($this, 'ContactForm')
-            ->addExtraClass('Contactform')->setAttribute('data-abide', 'data-abide');
-    }
-
-    public function Success()
-    {
-        return isset($_REQUEST['success']) && $_REQUEST['success'] == "1";
+        return ContactPageController::class;
     }
 }
