@@ -28,7 +28,7 @@ class ContactSubmission extends DataObject
         'Page' => ContactPage::class,
     ];
 
-    public static $summary_fields = [
+    private static $summary_fields = [
         'Name'  => 'Name',
         'Email' => 'Email',
     ];
