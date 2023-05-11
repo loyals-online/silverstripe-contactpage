@@ -35,6 +35,8 @@ use SilverStripe\ORM\DataList;
  */
 class ContactPage extends Page
 {
+    private static $table_name = 'ContactPage';
+
     private static $db = [
         'MailTo'           => 'Varchar(100)',
         'MailFrom'         => 'Varchar(100)',
