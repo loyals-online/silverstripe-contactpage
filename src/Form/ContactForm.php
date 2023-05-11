@@ -39,13 +39,13 @@ class ContactForm extends Form
         $this->validator = $this->getRequiredFields();
 
         // setup form errors (re-init after parent::__construct call)
-        parent::setupFormErrors();
+        $this->restoreFormState();
 
         // trigger foundation abide validation
         $this->setAttribute('data-abide', 'data-abide');
 
         // add som emore page/controller requirement
-        Requirements::javascript('loyals/jsend:javascript/jsend.js');
+        Requirements::javascript('mediaweb/silverstripe-jsend:javascript/jsend.js');
     }
 
     /**
