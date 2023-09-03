@@ -1,0 +1,3 @@
+mappings:
+  ContactSubmission: Loyals\ContactPage\Model\ContactSubmission
+  ContactPage: Loyals\ContactPage\Pages\ContactPage
