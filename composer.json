@@ -29,7 +29,8 @@
   ],
   "require": {
     "silverstripe/framework": "^4",
-    "mediaweb/silverstripe-jsend": "^2.0"
+    "mediaweb/silverstripe-jsend": "^2.0",
+    "undefinedoffset/silverstripe-nocaptcha": "^2.4"
   },
   "autoload": {
     "psr-4": {

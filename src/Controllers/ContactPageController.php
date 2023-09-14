@@ -5,6 +5,8 @@ namespace Loyals\ContactPage\Controllers;
 use PageController;
 use Loyals\ContactPage\Form\ContactForm;
 use Loyals\ContactPage\Pages\ContactPage;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\SpamProtection\Extension\FormSpamProtectionExtension;
 
 /**
  * Class ContactPage_Controller
@@ -21,8 +23,17 @@ class ContactPageController extends PageController
 
     public function ContactForm()
     {
-        return ContactForm::create($this, 'ContactForm')
+        $form = ContactForm::create($this, 'ContactForm')
             ->addExtraClass('Contactform')->setAttribute('data-abide', 'data-abide');
+
+        if (($config = Config::inst()->get(FormSpamProtectionExtension::class))
+            && isset($config['enable_spam_protection'])
+            && $config['enable_spam_protection']
+        ) {
+            $form->enableSpamProtection();
+        }
+
+        return $form;
     }
 
     public function Success()
